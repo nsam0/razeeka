@@ -49,9 +49,36 @@
         <a href="programs.html" class="nav-item">Programs</a>
         <a href="plans.html" class="nav-item active">Plans & Pricing</a>
         <a href="booking.html" class="btn btn-navy">Book a 1-on-1 Call</a>
+        <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Open navigation menu">
+          <i class="fa-solid fa-bars"></i>
+        </button>
       </nav>
     </div>
   </header>
+
+  <!-- Mobile Navigation Drawer -->
+  <div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
+  <div class="mobile-nav-drawer" id="mobileNavDrawer">
+    <div class="mobile-drawer-header">
+      <img src="logo.png" alt="HER PRIME" class="mobile-drawer-logo">
+      <button class="mobile-drawer-close" id="mobileNavClose" aria-label="Close navigation menu">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+    <nav class="mobile-drawer-links">
+      <a href="index.html" class="mobile-drawer-item"><i class="fa-solid fa-house"></i> Home</a>
+      <a href="index.html#about" class="mobile-drawer-item"><i class="fa-solid fa-user"></i> About Us</a>
+      <a href="programs.html" class="mobile-drawer-item"><i class="fa-solid fa-heart-pulse"></i> Our Programs</a>
+      <a href="plans.html" class="mobile-drawer-item active"><i class="fa-solid fa-tags"></i> Plans & Pricing</a>
+      <a href="booking.html" class="mobile-drawer-item mobile-highlight"><i class="fa-solid fa-calendar-check"></i> Book a 1-on-1 Call (₹99)</a>
+    </nav>
+    <div class="mobile-drawer-footer">
+      <a href="https://wa.me/" target="_blank" rel="noopener noreferrer" class="btn btn-gold w-100">
+        <i class="fa-brands fa-whatsapp"></i>
+        <span>Chat on WhatsApp</span>
+      </a>
+    </div>
+  </div>
 
   <!-- 3. PRICING CARDS SECTION -->
   <section class="plans-pricing-section">
@@ -311,6 +338,39 @@
       updateClock();
       setInterval(updateClock, 1000);
     })();
+
+    // Mobile Drawer Toggle
+    document.addEventListener('DOMContentLoaded', () => {
+      const mobileNavToggle = document.getElementById('mobileNavToggle');
+      const mobileNavClose = document.getElementById('mobileNavClose');
+      const mobileNavDrawer = document.getElementById('mobileNavDrawer');
+      const mobileNavOverlay = document.getElementById('mobileNavOverlay');
+      const mobileDrawerLinks = document.querySelectorAll('.mobile-drawer-item');
+
+      function openDrawer() {
+        if (mobileNavDrawer && mobileNavOverlay) {
+          mobileNavDrawer.classList.add('active');
+          mobileNavOverlay.classList.add('active');
+          document.body.style.overflow = 'hidden';
+        }
+      }
+
+      function closeDrawer() {
+        if (mobileNavDrawer && mobileNavOverlay) {
+          mobileNavDrawer.classList.remove('active');
+          mobileNavOverlay.classList.remove('active');
+          document.body.style.overflow = '';
+        }
+      }
+
+      if (mobileNavToggle) mobileNavToggle.addEventListener('click', openDrawer);
+      if (mobileNavClose) mobileNavClose.addEventListener('click', closeDrawer);
+      if (mobileNavOverlay) mobileNavOverlay.addEventListener('click', closeDrawer);
+
+      mobileDrawerLinks.forEach(link => {
+        link.addEventListener('click', closeDrawer);
+      });
+    });
   </script>
 
 </body>

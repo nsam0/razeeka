@@ -131,6 +131,163 @@ img {
 }
 
 /* --------------------------------------------------------------------------
+   MOBILE NAVIGATION DRAWER SYSTEM
+   -------------------------------------------------------------------------- */
+.mobile-nav-toggle {
+  display: none;
+  background: transparent;
+  border: none;
+  font-size: 1.45rem;
+  color: var(--color-navy);
+  cursor: pointer;
+  padding: 0.4rem;
+  line-height: 1;
+  transition: var(--transition);
+}
+
+.mobile-nav-toggle:hover {
+  color: var(--color-gold);
+}
+
+.mobile-nav-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(7, 18, 36, 0.7);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  z-index: 1001;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.mobile-nav-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.mobile-nav-drawer {
+  position: fixed;
+  top: 0;
+  right: -320px;
+  width: 300px;
+  max-width: 85vw;
+  height: 100vh;
+  background: #ffffff;
+  z-index: 1002;
+  box-shadow: -10px 0 30px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  transition: right 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.mobile-nav-drawer.active {
+  right: 0;
+}
+
+.mobile-drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.mobile-drawer-logo {
+  height: 42px;
+  width: auto;
+  object-fit: contain;
+}
+
+.mobile-drawer-close {
+  background: #f1f5f9;
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  color: var(--color-navy);
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.mobile-drawer-close:hover {
+  background: #fee2e2;
+  color: #dc2626;
+}
+
+.mobile-drawer-links {
+  flex: 1;
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  overflow-y: auto;
+}
+
+.mobile-drawer-item {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.85rem 1rem;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--color-navy);
+  transition: var(--transition);
+}
+
+.mobile-drawer-item i {
+  font-size: 1.1rem;
+  color: #64748b;
+  width: 20px;
+  text-align: center;
+}
+
+.mobile-drawer-item:hover,
+.mobile-drawer-item.active {
+  background: #f8fafc;
+  color: var(--color-gold);
+}
+
+.mobile-drawer-item:hover i,
+.mobile-drawer-item.active i {
+  color: var(--color-gold);
+}
+
+.mobile-drawer-item.mobile-highlight {
+  background: var(--color-navy);
+  color: #ffffff;
+  margin-top: 0.5rem;
+}
+
+.mobile-drawer-item.mobile-highlight i {
+  color: var(--color-gold);
+}
+
+.mobile-drawer-item.mobile-highlight:hover {
+  background: var(--color-navy-dark);
+  color: var(--color-gold);
+}
+
+.mobile-drawer-footer {
+  padding: 1.25rem 1.5rem;
+  border-top: 1px solid #f1f5f9;
+  background: #fafafa;
+}
+
+.mobile-drawer-footer .btn {
+  width: 100%;
+}
+
+.mobile-swipe-hint {
+  display: none;
+}
+
+/* --------------------------------------------------------------------------
    BUTTONS
    -------------------------------------------------------------------------- */
 .btn {
@@ -2186,21 +2343,23 @@ html, body {
   }
 
   .brand-wordmark-logo {
-    height: 48px;
-    max-width: 190px;
+    height: 46px;
+    max-width: 180px;
   }
 
-  .nav-links {
-    gap: 0.5rem;
+  .mobile-nav-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
   }
 
-  .nav-item {
-    display: none; /* Keep clean and uncluttered */
+  .nav-links .nav-item {
+    display: none !important;
   }
 
   .nav-links .btn {
-    padding: 0.55rem 1.05rem;
-    font-size: 0.825rem;
+    padding: 0.5rem 0.95rem;
+    font-size: 0.8rem;
     white-space: nowrap;
   }
 
@@ -2339,10 +2498,29 @@ html, body {
     margin-bottom: 2.5rem;
   }
 
+  /* --------------------------------------------------------------------------
+     1. MOBILE CAROUSEL FOR "Targeted Coaching for Every Stage" (3 Programs)
+     -------------------------------------------------------------------------- */
   .home-programs-grid {
-    grid-template-columns: 1fr;
-    gap: 1.75rem;
-    margin-bottom: 2.5rem;
+    display: flex !important;
+    overflow-x: auto !important;
+    scroll-snap-type: x mandatory !important;
+    -webkit-overflow-scrolling: touch !important;
+    gap: 1.25rem !important;
+    padding: 0.5rem 1.25rem 1.5rem 1.25rem !important;
+    margin: 0 -1.25rem 2rem -1.25rem !important;
+    scrollbar-width: none !important;
+  }
+
+  .home-programs-grid::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  .home-program-card {
+    flex: 0 0 85% !important;
+    max-width: 320px !important;
+    scroll-snap-align: center !important;
+    margin-bottom: 0 !important;
   }
 
   .home-program-img-wrap {
@@ -2369,13 +2547,36 @@ html, body {
 
   .how-subheading {
     font-size: 1rem;
-    margin-bottom: 3rem;
+    margin-bottom: 2.5rem;
   }
 
+  /* --------------------------------------------------------------------------
+     2. MOBILE CAROUSEL FOR "CUSTOMIZE YOUR HORMONAL COACHING PLAN" (4 Pillars)
+     -------------------------------------------------------------------------- */
   .how-grid {
-    grid-template-columns: 1fr;
-    gap: 2rem;
-    margin-bottom: 3rem;
+    display: flex !important;
+    overflow-x: auto !important;
+    scroll-snap-type: x mandatory !important;
+    -webkit-overflow-scrolling: touch !important;
+    gap: 1.25rem !important;
+    padding: 0.5rem 1.25rem 1.5rem 1.25rem !important;
+    margin: 0 -1.25rem 2.5rem -1.25rem !important;
+    scrollbar-width: none !important;
+  }
+
+  .how-grid::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  .how-item {
+    flex: 0 0 82% !important;
+    max-width: 300px !important;
+    scroll-snap-align: center !important;
+    background: rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(229, 169, 16, 0.25) !important;
+    border-radius: 20px !important;
+    padding: 2rem 1.5rem !important;
+    margin-bottom: 0 !important;
   }
 
   .how-circle-icon {
@@ -2400,6 +2601,28 @@ html, body {
   .how-footer .btn {
     width: 100%;
     padding: 0.85rem 1.25rem;
+  }
+
+  /* Mobile Swipe Hint Pills */
+  .mobile-swipe-hint {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-size: 0.74rem;
+    font-weight: 700;
+    color: var(--color-gold);
+    background: rgba(229, 169, 16, 0.1);
+    border: 1px solid rgba(229, 169, 16, 0.25);
+    padding: 0.35rem 0.85rem;
+    border-radius: 50px;
+    margin: 0 auto 1.5rem auto;
+    letter-spacing: 0.03em;
+  }
+
+  .how-it-works-section .mobile-swipe-hint {
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--color-gold);
+    border-color: rgba(229, 169, 16, 0.3);
   }
 
   /* YouTube Videos Section */
