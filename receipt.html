@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment Receipt & Invoice | HER PRIME HEALTH CENTRE</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="logo.png">
+
+  <!-- Google Fonts: Playfair Display, Inter & Space Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <link rel="stylesheet" href="styles.css">
+
+  <style>
+    /* ==========================================================================
+       ACTUAL POS THERMAL RECEIPT MACHINE STYLES
+       ========================================================================== */
+    .receipt-page-body {
+      background: radial-gradient(circle at 50% 15%, #0f244a 0%, #060e1c 100%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      color: #ffffff;
+      font-family: var(--font-sans);
+      overflow-x: clip;
+    }
+
+    .receipt-navbar {
+      background: rgba(7, 18, 36, 0.9);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(229, 169, 16, 0.25);
+      padding: 0.75rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .receipt-nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .receipt-brand-logo {
+      height: 48px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .receipt-main-wrap {
+      flex: 1;
+      padding: 2.5rem 1rem 4.5rem 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* REALISTIC 3D POS PRINTER MACHINE CHASSIS */
+    .pos-machine-station {
+      width: 100%;
+      max-width: 480px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .pos-printer-hardware {
+      background: linear-gradient(180deg, #2b3548 0%, #172033 45%, #0f172a 100%);
+      border: 3px solid #3b4861;
+      border-bottom: none;
+      border-radius: 24px 24px 8px 8px;
+      padding: 1.5rem 1.6rem 1.25rem 1.6rem;
+      box-shadow: 
+        0 25px 50px -12px rgba(0, 0, 0, 0.85),
+        0 0 0 1px rgba(255, 255, 255, 0.08) inset,
+        0 4px 12px rgba(0, 0, 0, 0.5) inset;
+      position: relative;
+      z-index: 25;
+    }
+
+    /* Top Machine Header */
+    .machine-top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      padding-bottom: 0.85rem;
+      margin-bottom: 1rem;
+    }
+
+    .machine-model-badge {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.76rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      color: #94a3b8;
+      text-transform: uppercase;
+    }
+
+    .machine-model-badge i {
+      color: var(--color-gold);
+      font-size: 0.95rem;
+    }
+
+    /* Machine Status LEDs */
+    .machine-led-group {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+    }
+
+    .led-indicator {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: #64748b;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .led-bulb {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #334155;
+      display: inline-block;
+      transition: all 0.3s ease;
+    }
+
+    .led-bulb.green-on {
+      background: #22c55e;
+      box-shadow: 0 0 8px #22c55e, 0 0 2px #ffffff;
+    }
+
+    .led-bulb.blue-on {
+      background: #38bdf8;
+      box-shadow: 0 0 8px #38bdf8, 0 0 2px #ffffff;
+    }
+
+    .led-bulb.amber-blink {
+      background: #f59e0b;
+      box-shadow: 0 0 10px #f59e0b;
+      animation: ledAmberPulse 0.4s infinite alternate;
+    }
+
+    @keyframes ledAmberPulse {
+      from { opacity: 0.3; transform: scale(0.85); }
+      to { opacity: 1; transform: scale(1.2); }
+    }
+
+    /* LCD Digital Screen Display */
+    .machine-lcd-screen {
+      background: #04140c;
+      border: 2px solid #0f3822;
+      border-radius: 10px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 1.1rem;
+      box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.9), 0 0 12px rgba(34, 197, 94, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-family: 'Space Mono', monospace;
+    }
+
+    .lcd-text-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+
+    .lcd-sub {
+      font-size: 0.68rem;
+      color: #4ade80;
+      opacity: 0.75;
+      letter-spacing: 0.05em;
+    }
+
+    .lcd-main-status {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #22c55e;
+      text-shadow: 0 0 6px rgba(34, 197, 94, 0.7);
+      letter-spacing: 0.06em;
+    }
+
+    .lcd-progress-bar {
+      width: 100px;
+      height: 8px;
+      background: #022013;
+      border: 1px solid #166534;
+      border-radius: 4px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .lcd-progress-fill {
+      height: 100%;
+      width: 0%;
+      background: #22c55e;
+      box-shadow: 0 0 8px #22c55e;
+      transition: width 0.1s linear;
+    }
+
+    /* Physical Control Buttons */
+    .machine-controls-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+    }
+
+    .machine-btn-tactile {
+      background: linear-gradient(180deg, #334155 0%, #1e293b 100%);
+      border: 1px solid #475569;
+      color: #e2e8f0;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 0.4rem 0.85rem;
+      border-radius: 6px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.15);
+      transition: all 0.15s ease;
+    }
+
+    .machine-btn-tactile:hover {
+      background: #475569;
+      color: #ffffff;
+    }
+
+    .machine-btn-tactile:active {
+      transform: translateY(2px);
+      box-shadow: 0 1px 2px rgba(0,0,0,0.6);
+    }
+
+    .machine-serial {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      color: #64748b;
+      letter-spacing: 0.05em;
+    }
+
+    /* Machine Exit Mouth / Bezel with Metal Serrated Cutter */
+    .machine-exit-slot-bezel {
+      background: #050b14;
+      border-radius: 8px;
+      border: 2px solid #1e293b;
+      box-shadow: inset 0 4px 10px rgba(0, 0, 0, 0.95);
+      padding: 3px;
+      position: relative;
+    }
+
+    .metallic-cutter-blade {
+      height: 6px;
+      background: linear-gradient(90deg, #64748b 0%, #cbd5e1 50%, #64748b 100%);
+      border-radius: 3px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+      position: relative;
+      z-index: 30;
+    }
+
+    .roller-shadow {
+      height: 8px;
+      background: #020617;
+      border-radius: 4px;
+      margin-top: 2px;
+      position: relative;
+    }
+
+    /* SLOW GRADUAL THERMAL RECEIPT DISPENSER */
+    .receipt-paper-envelope {
+      position: relative;
+      z-index: 15;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      margin-top: -6px;
+    }
+
+    .thermal-receipt-sheet {
+      width: calc(100% - 24px);
+      max-width: 440px;
+      background: #faf8f5;
+      color: #0f172a;
+      border-left: 1px solid #d1d5db;
+      border-right: 1px solid #d1d5db;
+      box-shadow: 
+        0 20px 45px rgba(0, 0, 0, 0.6), 
+        0 4px 14px rgba(0, 0, 0, 0.2),
+        inset 0 0 20px rgba(0, 0, 0, 0.02);
+      padding: 2.2rem 1.85rem 2.8rem 1.85rem;
+      position: relative;
+      transform-origin: top center;
+      clip-path: inset(0 0 100% 0);
+      opacity: 0.1;
+      filter: drop-shadow(0 15px 25px rgba(0,0,0,0.4));
+    }
+
+    /* Sawtooth Jagged Tear Border */
+    .thermal-receipt-sheet::after {
+      content: "";
+      position: absolute;
+      bottom: -15px;
+      left: 0;
+      right: 0;
+      height: 16px;
+      background: 
+        linear-gradient(135deg, #faf8f5 50%, transparent 50%), 
+        linear-gradient(-135deg, #faf8f5 50%, transparent 50%);
+      background-size: 14px 14px;
+      background-repeat: repeat-x;
+    }
+
+    /* Slow gradual realistic print animation */
+    .thermal-receipt-sheet.printing-active {
+      animation: slowRealisticPrint 4.2s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+    }
+
+    @keyframes slowRealisticPrint {
+      0% {
+        clip-path: inset(0 0 100% 0);
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      5% {
+        opacity: 1;
+        clip-path: inset(0 0 94% 0);
+        transform: translateY(0);
+      }
+      20% {
+        clip-path: inset(0 0 78% 0);
+      }
+      38% {
+        clip-path: inset(0 0 60% 0);
+      }
+      58% {
+        clip-path: inset(0 0 42% 0);
+      }
+      78% {
+        clip-path: inset(0 0 22% 0);
+      }
+      92% {
+        clip-path: inset(0 0 6% 0);
+      }
+      100% {
+        clip-path: inset(0 0 0% 0);
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .thermal-receipt-sheet.printed-done {
+      clip-path: inset(0 0 0% 0);
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* RECEIPT INTERIOR TYPOGRAPHY & LAYOUT */
+    .receipt-header-section {
+      text-align: center;
+      padding-bottom: 1.15rem;
+      border-bottom: 2px dashed #94a3b8;
+      margin-bottom: 1.15rem;
+    }
+
+    .receipt-logo-img {
+      height: 52px;
+      width: auto;
+      object-fit: contain;
+      margin: 0 auto 0.4rem auto;
+      display: block;
+    }
+
+    .receipt-center-name {
+      font-family: var(--font-serif);
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--color-navy);
+      letter-spacing: 0.03em;
+    }
+
+    .receipt-coach-line {
+      font-size: 0.76rem;
+      color: #64748b;
+      margin-top: 0.15rem;
+    }
+
+    .receipt-invoice-pill {
+      display: inline-block;
+      background: #f1f5f9;
+      color: var(--color-navy);
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 0.25rem 0.8rem;
+      border-radius: 50px;
+      border: 1px solid #cbd5e1;
+      margin-top: 0.6rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* Transaction Meta Grid */
+    .receipt-meta-table {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.6rem;
+      font-size: 0.78rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px dashed #cbd5e1;
+      margin-bottom: 1rem;
+      font-family: 'Space Mono', monospace;
+    }
+
+    .meta-box {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .meta-lbl {
+      color: #64748b;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+    }
+
+    .meta-val {
+      font-weight: 700;
+      color: #0f172a;
+    }
+
+    /* Client Info Card */
+    .receipt-client-box {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 0.75rem 0.9rem;
+      margin-bottom: 1.15rem;
+    }
+
+    .client-data-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      margin-bottom: 0.35rem;
+    }
+
+    .client-data-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .client-lbl {
+      color: #64748b;
+    }
+
+    .client-val {
+      font-weight: 700;
+      color: #0f172a;
+      text-align: right;
+    }
+
+    /* Line Items */
+    .receipt-items-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 1.15rem;
+    }
+
+    .receipt-items-table th {
+      text-align: left;
+      font-size: 0.72rem;
+      color: #64748b;
+      text-transform: uppercase;
+      padding-bottom: 0.45rem;
+      border-bottom: 1px solid #e2e8f0;
+      font-family: 'Space Mono', monospace;
+    }
+
+    .receipt-items-table th.text-right {
+      text-align: right;
+    }
+
+    .receipt-items-table td {
+      padding: 0.75rem 0;
+      font-size: 0.84rem;
+      border-bottom: 1px solid #f1f5f9;
+      vertical-align: top;
+    }
+
+    .receipt-items-table td.text-right {
+      text-align: right;
+      font-weight: 700;
+      font-family: 'Space Mono', monospace;
+    }
+
+    .item-sub-desc {
+      display: block;
+      font-size: 0.74rem;
+      color: #64748b;
+      margin-top: 0.15rem;
+    }
+
+    /* Totals Section */
+    .receipt-totals-section {
+      border-top: 2px dashed #0f172a;
+      padding-top: 0.85rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .total-calc-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.82rem;
+      margin-bottom: 0.35rem;
+      color: #475569;
+    }
+
+    .total-pay-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--color-navy);
+      border-top: 1px solid #0f172a;
+      border-bottom: 1px solid #0f172a;
+      padding: 0.6rem 0;
+      margin-top: 0.5rem;
+      font-family: 'Space Mono', monospace;
+    }
+
+    .paid-stamp-box {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      background: #f0fdf4;
+      border: 1.5px solid #22c55e;
+      color: #15803d;
+      font-size: 0.82rem;
+      font-weight: 800;
+      padding: 0.45rem;
+      border-radius: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-top: 0.75rem;
+    }
+
+    /* Barcode Area */
+    .receipt-barcode-zone {
+      text-align: center;
+      padding-top: 1rem;
+      border-top: 1px dashed #cbd5e1;
+    }
+
+    .barcode-vector {
+      width: 82%;
+      height: 42px;
+      margin: 0 auto;
+      display: block;
+    }
+
+    .barcode-caption {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.68rem;
+      color: #64748b;
+      letter-spacing: 0.22em;
+      margin-top: 0.25rem;
+    }
+
+    .receipt-signoff {
+      font-family: var(--font-serif);
+      font-size: 0.88rem;
+      font-style: italic;
+      color: var(--color-navy);
+      margin: 0.85rem 0 0.25rem 0;
+    }
+
+    .receipt-disclaimer-fine {
+      font-size: 0.68rem;
+      color: #94a3b8;
+      line-height: 1.4;
+    }
+
+    /* EXTERNAL ACTIONS UNDER MACHINE */
+    .receipt-external-actions {
+      width: 100%;
+      max-width: 460px;
+      margin: 2.25rem auto 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+      position: relative;
+      z-index: 35;
+    }
+
+    .btn-receipt-whatsapp {
+      background-color: #25d366;
+      color: #ffffff;
+      box-shadow: 0 6px 20px rgba(37, 211, 102, 0.35);
+      border: none;
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 0.85rem 1.5rem;
+    }
+
+    .btn-receipt-whatsapp:hover {
+      background-color: #1ebc59;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(37, 211, 102, 0.45);
+      color: #ffffff;
+    }
+
+    .btn-receipt-print {
+      background-color: transparent;
+      color: #ffffff;
+      border: 1.5px solid rgba(255, 255, 255, 0.3);
+      font-size: 0.95rem;
+    }
+
+    .btn-receipt-print:hover {
+      background-color: #ffffff;
+      color: var(--color-navy);
+      border-color: #ffffff;
+      transform: translateY(-2px);
+    }
+
+    .btn-receipt-home {
+      color: #94a3b8;
+      text-align: center;
+      font-size: 0.88rem;
+      font-weight: 600;
+      margin-top: 0.25rem;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+    }
+
+    .btn-receipt-home:hover {
+      color: var(--color-gold);
+    }
+
+    /* Print Media Styles */
+    @media print {
+      body {
+        background: #ffffff !important;
+        color: #000000 !important;
+      }
+      .receipt-navbar,
+      .pos-printer-hardware,
+      .receipt-external-actions {
+        display: none !important;
+      }
+      .receipt-main-wrap {
+        padding: 0 !important;
+      }
+      .thermal-receipt-sheet {
+        box-shadow: none !important;
+        border: none !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        animation: none !important;
+        clip-path: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+      }
+      .thermal-receipt-sheet::after {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+<body class="receipt-page-body">
+
+  <!-- 1. NAVBAR -->
+  <header class="receipt-navbar">
+    <div class="container receipt-nav-container">
+      <a href="index.html">
+        <img src="logo.png" alt="HER PRIME HEALTH CENTRE" class="receipt-brand-logo">
+      </a>
+      <div class="checkout-trust-badge" style="background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.15); color: #ffffff;">
+        <i class="fa-solid fa-circle-check text-green"></i>
+        <span>Official Payment Voucher</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- 2. MAIN POS PRINTER & ANIMATED SLOW RECEIPT -->
+  <main class="receipt-main-wrap">
+    
+    <div class="pos-machine-station">
+      
+      <!-- ACTUAL POS THERMAL PRINTER HARDWARE UNIT -->
+      <div class="pos-printer-hardware">
+        
+        <!-- Top Bar: Model & LEDs -->
+        <div class="machine-top-bar">
+          <div class="machine-model-badge">
+            <i class="fa-solid fa-print"></i>
+            <span>HER PRIME POS-80 PRO</span>
+          </div>
+
+          <div class="machine-led-group">
+            <div class="led-indicator">
+              <span class="led-bulb green-on"></span>
+              <span>PWR</span>
+            </div>
+            <div class="led-indicator">
+              <span class="led-bulb blue-on"></span>
+              <span>ONLINE</span>
+            </div>
+            <div class="led-indicator">
+              <span class="led-bulb amber-blink" id="ledPrintStatus"></span>
+              <span>PRINT</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- LCD Matrix Screen -->
+        <div class="machine-lcd-screen">
+          <div class="lcd-text-wrap">
+            <span class="lcd-sub">SYSTEM READY</span>
+            <span class="lcd-main-status" id="lcdStatusMsg">PRINTING INVOICE...</span>
+          </div>
+          <div class="lcd-progress-bar">
+            <div class="lcd-progress-fill" id="lcdProgressFill"></div>
+          </div>
+        </div>
+
+        <!-- Tactile Control Buttons -->
+        <div class="machine-controls-row">
+          <button type="button" class="machine-btn-tactile" onclick="triggerReprint()">
+            <i class="fa-solid fa-rotate-right"></i>
+            <span>REPRINT RECEIPT</span>
+          </button>
+          <span class="machine-serial">SN: HPHC-2026-T80</span>
+        </div>
+
+        <!-- Paper Exit Mouth with Metallic Serrated Cutter -->
+        <div class="machine-exit-slot-bezel">
+          <div class="metallic-cutter-blade"></div>
+          <div class="roller-shadow"></div>
+        </div>
+
+      </div>
+
+      <!-- GRADUAL SLOW DISPENSED THERMAL PAPER -->
+      <div class="receipt-paper-envelope">
+        <article class="thermal-receipt-sheet printing-active" id="receiptPaperDoc">
+          
+          <!-- Receipt Header -->
+          <div class="receipt-header-section">
+            <img src="logo.png" alt="HER PRIME" class="receipt-logo-img">
+            <h1 class="receipt-center-name">HER PRIME HEALTH CENTRE</h1>
+            <p class="receipt-coach-line">Root-Cause Hormonal Health Coaching • By Razeeka</p>
+            <span class="receipt-invoice-pill" id="receiptBadge">OFFICIAL PAYMENT INVOICE</span>
+          </div>
+
+          <!-- Meta Data Grid -->
+          <div class="receipt-meta-table">
+            <div class="meta-box">
+              <span class="meta-lbl">TXN ID:</span>
+              <span class="meta-val" id="receiptTxnId">HPHC-89341209</span>
+            </div>
+            <div class="meta-box">
+              <span class="meta-lbl">DATE & TIME:</span>
+              <span class="meta-val" id="receiptDate">26-Aug-2026 16:50</span>
+            </div>
+            <div class="meta-box">
+              <span class="meta-lbl">STATUS:</span>
+              <span class="meta-val" style="color: #16a34a;">PAID & VERIFIED</span>
+            </div>
+            <div class="meta-box">
+              <span class="meta-lbl">METHOD:</span>
+              <span class="meta-val" id="receiptPayMode">UPI Instant</span>
+            </div>
+          </div>
+
+          <!-- Customer Data Card -->
+          <div class="receipt-client-box">
+            <div class="client-data-row">
+              <span class="client-lbl">Client Name:</span>
+              <span class="client-val" id="receiptClientName">Priya Sharma</span>
+            </div>
+            <div class="client-data-row">
+              <span class="client-lbl">WhatsApp:</span>
+              <span class="client-val" id="receiptClientPhone">+91 98765 43210</span>
+            </div>
+            <div class="client-data-row" id="rowCustomerGoal">
+              <span class="client-lbl">Health Focus:</span>
+              <span class="client-val" id="receiptClientGoal">Postpartum Weight Loss</span>
+            </div>
+            <div class="client-data-row" id="rowCustomerSlot" style="display: none;">
+              <span class="client-lbl">Preferred Time:</span>
+              <span class="client-val" id="receiptClientSlot">Tomorrow (5:00 PM)</span>
+            </div>
+          </div>
+
+          <!-- Items Table -->
+          <table class="receipt-items-table">
+            <thead>
+              <tr>
+                <th>DESCRIPTION</th>
+                <th class="text-right">AMOUNT</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <strong id="receiptItemTitle">Diet + Workout + Meditation Plan</strong>
+                  <span class="item-sub-desc" id="receiptItemSub">4 Months Coaching (3 Mo. + 1 Mo. FREE)</span>
+                </td>
+                <td class="text-right" id="receiptItemOriginalPrice">₹7,996</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <!-- Totals Section -->
+          <div class="receipt-totals-section">
+            <div class="total-calc-row" id="rowOriginalVal">
+              <span>Package Value:</span>
+              <span id="valOriginalAmt">₹7,996</span>
+            </div>
+            <div class="total-calc-row" id="rowSubsidyDiscount">
+              <span style="color: #16a34a;">Special Offer Subsidy:</span>
+              <span style="color: #16a34a; font-weight: 700;" id="valSubsidyDiscount">- ₹1,999</span>
+            </div>
+            <div class="total-pay-row">
+              <span>TOTAL PAID:</span>
+              <span id="valTotalPaid">₹5,997</span>
+            </div>
+            
+            <div class="paid-stamp-box">
+              <i class="fa-solid fa-circle-check"></i>
+              <span>PAYMENT RECEIVED • ONBOARDING ACTIVE</span>
+            </div>
+          </div>
+
+          <!-- Barcode Area -->
+          <div class="receipt-barcode-zone">
+            <svg class="barcode-vector" viewBox="0 0 200 40" preserveAspectRatio="none">
+              <rect x="0" y="0" width="3" height="40" fill="#0f172a"/>
+              <rect x="6" y="0" width="2" height="40" fill="#0f172a"/>
+              <rect x="12" y="0" width="4" height="40" fill="#0f172a"/>
+              <rect x="18" y="0" width="1" height="40" fill="#0f172a"/>
+              <rect x="24" y="0" width="5" height="40" fill="#0f172a"/>
+              <rect x="32" y="0" width="2" height="40" fill="#0f172a"/>
+              <rect x="38" y="0" width="4" height="40" fill="#0f172a"/>
+              <rect x="46" y="0" width="1" height="40" fill="#0f172a"/>
+              <rect x="50" y="0" width="3" height="40" fill="#0f172a"/>
+              <rect x="56" y="0" width="6" height="40" fill="#0f172a"/>
+              <rect x="65" y="0" width="2" height="40" fill="#0f172a"/>
+              <rect x="70" y="0" width="4" height="40" fill="#0f172a"/>
+              <rect x="78" y="0" width="1" height="40" fill="#0f172a"/>
+              <rect x="82" y="0" width="5" height="40" fill="#0f172a"/>
+              <rect x="90" y="0" width="3" height="40" fill="#0f172a"/>
+              <rect x="96" y="0" width="2" height="40" fill="#0f172a"/>
+              <rect x="102" y="0" width="4" height="40" fill="#0f172a"/>
+              <rect x="110" y="0" width="6" height="40" fill="#0f172a"/>
+              <rect x="118" y="0" width="2" height="40" fill="#0f172a"/>
+              <rect x="124" y="0" width="4" height="40" fill="#0f172a"/>
+              <rect x="132" y="0" width="1" height="40" fill="#0f172a"/>
+              <rect x="136" y="0" width="5" height="40" fill="#0f172a"/>
+              <rect x="144" y="0" width="3" height="40" fill="#0f172a"/>
+              <rect x="150" y="0" width="2" height="40" fill="#0f172a"/>
+              <rect x="156" y="0" width="5" height="40" fill="#0f172a"/>
+              <rect x="164" y="0" width="1" height="40" fill="#0f172a"/>
+              <rect x="170" y="0" width="4" height="40" fill="#0f172a"/>
+              <rect x="178" y="0" width="2" height="40" fill="#0f172a"/>
+              <rect x="184" y="0" width="5" height="40" fill="#0f172a"/>
+              <rect x="194" y="0" width="4" height="40" fill="#0f172a"/>
+            </svg>
+            <div class="barcode-caption" id="receiptBarcodeText">HPHC * 89341209 * VERIFIED</div>
+            
+            <p class="receipt-signoff">“Nourish with Body, Mind & Soul”</p>
+            <p class="receipt-disclaimer-fine">This is a system generated thermal electronic receipt for health coaching services under HER PRIME HEALTH CENTRE.</p>
+          </div>
+
+        </article>
+      </div>
+
+    </div>
+
+    <!-- External Quick Actions -->
+    <div class="receipt-external-actions">
+      <a id="btnWhatsAppConnect" href="https://wa.me/" target="_blank" rel="noopener noreferrer" class="btn btn-receipt-whatsapp">
+        <i class="fa-brands fa-whatsapp" style="font-size: 1.3rem;"></i>
+        <span>Connect with Razeeka on WhatsApp</span>
+      </a>
+
+      <button type="button" class="btn btn-receipt-print" onclick="window.print()">
+        <i class="fa-solid fa-file-pdf"></i>
+        <span>Download / Print Official Receipt</span>
+      </button>
+
+      <a href="index.html" class="btn-receipt-home">
+        <i class="fa-solid fa-house"></i>
+        <span>Return to Home</span>
+      </a>
+    </div>
+
+  </main>
+
+  <!-- POS Audio & Animation Controller -->
+  <script>
+    let audioCtx = null;
+
+    function playThermalBeep() {
+      try {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        if (!AudioContext) return;
+        if (!audioCtx) audioCtx = new AudioContext();
+        
+        // Rhythmic thermal motor buzz pulses
+        const now = audioCtx.currentTime;
+        for (let i = 0; i < 7; i++) {
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(420 + (i % 2) * 60, now + i * 0.5);
+          gain.gain.setValueAtTime(0.02, now + i * 0.5);
+          gain.gain.exponentialRampToValueAtTime(0.0001, now + i * 0.5 + 0.18);
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+          osc.start(now + i * 0.5);
+          osc.stop(now + i * 0.5 + 0.18);
+        }
+
+        // Final cutter click at 4.2s
+        setTimeout(() => {
+          if (!audioCtx) return;
+          const oscCut = audioCtx.createOscillator();
+          const gainCut = audioCtx.createGain();
+          oscCut.type = 'square';
+          oscCut.frequency.setValueAtTime(980, audioCtx.currentTime);
+          gainCut.gain.setValueAtTime(0.04, audioCtx.currentTime);
+          gainCut.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.12);
+          oscCut.connect(gainCut);
+          gainCut.connect(audioCtx.destination);
+          oscCut.start();
+          oscCut.stop(audioCtx.currentTime + 0.12);
+        }, 4200);
+
+      } catch (err) {
+        // audio optional
+      }
+    }
+
+    function runMachinePrintingSequence() {
+      const paper = document.getElementById('receiptPaperDoc');
+      const progressFill = document.getElementById('lcdProgressFill');
+      const statusMsg = document.getElementById('lcdStatusMsg');
+      const ledStatus = document.getElementById('ledPrintStatus');
+
+      paper.classList.remove('printing-active', 'printed-done');
+      void paper.offsetWidth; // trigger reflow
+      paper.classList.add('printing-active');
+
+      ledStatus.className = 'led-bulb amber-blink';
+      statusMsg.textContent = 'PRINTING INVOICE...';
+      progressFill.style.width = '0%';
+
+      playThermalBeep();
+
+      const startTime = performance.now();
+      const duration = 4200; // 4.2 seconds realistic slow print
+
+      function updateProgress(now) {
+        const elapsed = now - startTime;
+        const pct = Math.min(100, Math.floor((elapsed / duration) * 100));
+        progressFill.style.width = pct + '%';
+
+        if (pct < 30) {
+          statusMsg.textContent = `PRINTING HEADER (${pct}%)`;
+        } else if (pct < 65) {
+          statusMsg.textContent = `PRINTING CLIENT DATA (${pct}%)`;
+        } else if (pct < 95) {
+          statusMsg.textContent = `PRINTING TOTALS (${pct}%)`;
+        } else {
+          statusMsg.textContent = `PRINT COMPLETE (100%)`;
+        }
+
+        if (elapsed < duration) {
+          requestAnimationFrame(updateProgress);
+        } else {
+          ledStatus.className = 'led-bulb green-on';
+          statusMsg.textContent = 'RECEIPT ISSUED [OK]';
+          paper.classList.remove('printing-active');
+          paper.classList.add('printed-done');
+        }
+      }
+
+      requestAnimationFrame(updateProgress);
+    }
+
+    function triggerReprint() {
+      runMachinePrintingSequence();
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Generate Unique Transaction ID
+      const randomTxn = 'HPHC-' + Math.floor(10000000 + Math.random() * 90000000);
+      document.getElementById('receiptTxnId').textContent = randomTxn;
+      document.getElementById('receiptBarcodeText').textContent = `${randomTxn} • VERIFIED`;
+
+      // 2. Format Live Date
+      const now = new Date();
+      const options = { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' };
+      document.getElementById('receiptDate').textContent = now.toLocaleDateString('en-IN', options);
+
+      // 3. Read Query Parameters
+      const params = new URLSearchParams(window.location.search);
+      const type = params.get('type') || 'plan';
+      const name = params.get('name') || 'Priya Sharma';
+      const phone = params.get('phone') || '+91 98765 43210';
+      const goal = params.get('goal') || 'Hormonal Health Transformation';
+      const slot = params.get('slot') || '';
+      const planName = params.get('plan') || 'Diet + Workout + Meditation Plan';
+      const duration = params.get('duration') || '4 Months Total (3 Mo. + 1 Mo. FREE)';
+      const amount = params.get('amount') || '5997';
+      const originalValue = params.get('orig') || '7996';
+
+      // Populate Client Details
+      document.getElementById('receiptClientName').textContent = name;
+      document.getElementById('receiptClientPhone').textContent = phone;
+      document.getElementById('receiptClientGoal').textContent = goal;
+
+      if (type === 'booking') {
+        document.getElementById('receiptBadge').textContent = '1-ON-1 CONSULTATION VOUCHER';
+        document.getElementById('receiptItemTitle').textContent = '1-on-1 Hormonal Health & Weight Loss Strategy Call';
+        document.getElementById('receiptItemSub').textContent = `Duration: 30–40 Mins Private Live Call • ${slot || 'Slot Scheduled'}`;
+        document.getElementById('receiptItemOriginalPrice').textContent = '₹1,999';
+        
+        document.getElementById('rowOriginalVal').style.display = 'flex';
+        document.getElementById('valOriginalAmt').textContent = '₹1,999';
+        document.getElementById('rowSubsidyDiscount').style.display = 'flex';
+        document.getElementById('valSubsidyDiscount').textContent = '- ₹1,900';
+        document.getElementById('valTotalPaid').textContent = '₹99';
+
+        if (slot) {
+          document.getElementById('rowCustomerSlot').style.display = 'flex';
+          document.getElementById('receiptClientSlot').textContent = slot;
+        }
+
+        const msg = encodeURIComponent(`Hi Razeeka, I have completed my ₹99 1-on-1 Consultation Call booking.\n\nTxn ID: ${randomTxn}\nName: ${name}\nPhone: ${phone}\nGoal: ${goal}\nTime Slot: ${slot || 'Flexible'}\n\nPlease confirm my appointment schedule.`);
+        document.getElementById('btnWhatsAppConnect').href = `https://wa.me/?text=${msg}`;
+
+      } else {
+        document.getElementById('receiptBadge').textContent = 'COACHING ENROLLMENT INVOICE';
+        document.getElementById('receiptItemTitle').textContent = planName;
+        document.getElementById('receiptItemSub').textContent = `Coaching Duration: ${duration}`;
+        
+        const numAmt = parseInt(amount, 10) || 5997;
+        const numOrig = parseInt(originalValue, 10) || (numAmt > 2000 ? 7996 : 3996);
+        const numDisc = numOrig - numAmt;
+
+        if (numDisc > 0) {
+          document.getElementById('receiptItemOriginalPrice').textContent = `₹${numOrig.toLocaleString()}`;
+          document.getElementById('rowOriginalVal').style.display = 'flex';
+          document.getElementById('valOriginalAmt').textContent = `₹${numOrig.toLocaleString()}`;
+          document.getElementById('rowSubsidyDiscount').style.display = 'flex';
+          document.getElementById('valSubsidyDiscount').textContent = `- ₹${numDisc.toLocaleString()}`;
+        } else {
+          document.getElementById('receiptItemOriginalPrice').textContent = `₹${numAmt.toLocaleString()}`;
+          document.getElementById('rowOriginalVal').style.display = 'none';
+          document.getElementById('rowSubsidyDiscount').style.display = 'none';
+        }
+
+        document.getElementById('valTotalPaid').textContent = `₹${numAmt.toLocaleString()}`;
+
+        const msg = encodeURIComponent(`Hi Razeeka, I have enrolled in the ${planName}.\n\nTxn ID: ${randomTxn}\nName: ${name}\nPhone: ${phone}\nDuration: ${duration}\nAmount Paid: ₹${numAmt.toLocaleString()}\nGoal: ${goal}\n\nPlease share my onboarding plan & personalized framework.`);
+        document.getElementById('btnWhatsAppConnect').href = `https://wa.me/?text=${msg}`;
+      }
+
+      // Start printing sequence
+      runMachinePrintingSequence();
+    });
+  </script>
+
+</body>
+</html>

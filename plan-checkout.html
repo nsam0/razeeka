@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Complete Your Enrollment | HER PRIME HEALTH CENTRE</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="logo.png">
+
+  <!-- Google Fonts: Playfair Display (Heading) & Inter (Body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600;1,700&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="booking-page-body">
+
+  <!-- 1. LIVE URGENCY COUNTDOWN TOP BAR (Clickable to auto-apply offer) -->
+  <div class="urgency-top-bar" id="topOfferBar" onclick="claimOfferFromTop()" style="cursor: pointer;" title="Click to auto-apply 3 Months + 1 Month FREE Offer!">
+    <div class="container urgency-container">
+      <div class="urgency-text">
+        <i class="fa-solid fa-fire text-gold"></i>
+        <span><strong>SPECIAL FLASH OFFER:</strong> On 3-Month Registration, <strong>Get 1 Month 100% FREE!</strong></span>
+        <span class="claim-offer-btn"><i class="fa-solid fa-bolt"></i> Auto Apply (Click Here)</span>
+      </div>
+      <div class="countdown-clock" id="countdownClock">
+        <span class="timer-label">Ends In:</span>
+        <span class="time-block" id="timerHours">04</span><span class="colon">:</span>
+        <span class="time-block" id="timerMins">32</span><span class="colon">:</span>
+        <span class="time-block" id="timerSecs">15</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. CHECKOUT HEADER -->
+  <header class="checkout-navbar">
+    <div class="container checkout-nav-container">
+      <div class="checkout-nav-left">
+        <a href="plans.html" class="checkout-back-link">
+          <i class="fa-solid fa-arrow-left"></i>
+          <span>Change Plan</span>
+        </a>
+        <a href="index.html" class="checkout-brand">
+          <img src="logo.png" alt="HER PRIME HEALTH CENTRE" class="checkout-logo">
+        </a>
+      </div>
+      
+      <div class="checkout-trust-badge">
+        <i class="fa-solid fa-shield-halved text-gold"></i>
+        <span>256-Bit SSL Encrypted Checkout</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- 3. MAIN CHECKOUT SECTION -->
+  <main class="checkout-main-section">
+    <div class="container">
+      
+      <div class="checkout-grid">
+        
+        <!-- LEFT COLUMN: Selected Plan & Package Summary -->
+        <div class="checkout-summary-column">
+          
+          <div class="summary-card">
+            
+            <!-- Consolidated Duration Selection Grid -->
+            <div class="duration-selection-card">
+              <div class="duration-header-row">
+                <label class="duration-select-label">Choose Coaching Duration:</label>
+                <span class="free-month-tag" id="freeMonthTag">
+                  <i class="fa-solid fa-gift"></i> +1 Month FREE Applied!
+                </span>
+              </div>
+
+              <!-- Single Consolidated Duration Buttons Grid -->
+              <div class="duration-options-grid">
+                <button type="button" class="duration-card-btn" id="pill1" onclick="setExactMonths(1)">
+                  <span class="duration-title">1 Month</span>
+                  <span class="duration-sub">Standard Access</span>
+                </button>
+                
+                <button type="button" class="duration-card-btn" id="pill2" onclick="setExactMonths(2)">
+                  <span class="duration-title">2 Months</span>
+                  <span class="duration-sub">2 Months Total</span>
+                </button>
+
+                <button type="button" class="duration-card-btn active" id="pill3" onclick="setExactMonths(3)">
+                  <span class="duration-badge-top">BEST VALUE</span>
+                  <span class="duration-title">3 Mo. + 1 FREE</span>
+                  <span class="duration-sub">4 Months Total</span>
+                </button>
+
+                <button type="button" class="duration-card-btn" id="pill6" onclick="setExactMonths(6)">
+                  <span class="duration-badge-top">DOUBLE VALUE</span>
+                  <span class="duration-title">6 Mo. + 2 FREE</span>
+                  <span class="duration-sub">8 Months Total</span>
+                </button>
+              </div>
+
+              <!-- Dynamic Offer Status Alert Directly Below Selection -->
+              <div class="offer-status-alert alert-success" id="offerStatusAlert">
+                <i class="fa-solid fa-circle-check text-green" id="offerStatusIcon"></i>
+                <span id="offerStatusText"><i class="fa-solid fa-circle-check text-green"></i> <strong>Special Offer Applied!</strong> You pay for 3 Months & receive <strong>4 Full Months of Coaching</strong> (Saved ₹1,999!).</span>
+              </div>
+            </div>
+
+            <!-- Selected Plan Header -->
+            <div class="selected-plan-box">
+              <span class="summary-badge" id="planBadge">Signature 3-Pillar Transformation</span>
+              <h1 class="summary-title" id="planTitle">Diet + Workout + Meditation Plan</h1>
+              <p class="plan-coach-line">
+                <i class="fa-solid fa-award text-gold"></i> Mentored Directly by <strong>Razeeka</strong> (7+ Years Experience)
+              </p>
+            </div>
+
+            <!-- Features Checklist -->
+            <div class="whats-included">
+              <h3 class="included-title">What You Will Receive:</h3>
+              <ul class="included-list" id="planFeaturesList">
+                <!-- Populated dynamically by JS -->
+              </ul>
+            </div>
+
+            <!-- Price Breakdown Box -->
+            <div class="price-breakdown-box">
+              <div class="price-row" id="rowOriginalPrice">
+                <span id="labelOriginalPrice">Total Package Value (4 Months)</span>
+                <span class="strike-price" id="valOriginalPrice">₹7,996</span>
+              </div>
+              <div class="price-row" id="rowDiscount">
+                <span id="labelDiscount">Free Month Subsidy Discount</span>
+                <span class="text-green" id="valDiscount">- ₹1,999</span>
+              </div>
+              <div class="price-row total-row">
+                <span>Total Amount Payable</span>
+                <span class="final-price" id="valTotalPayable">₹5,997</span>
+              </div>
+            </div>
+
+            <div class="trust-guarantees">
+              <div class="guarantee-item">
+                <i class="fa-solid fa-circle-check text-gold"></i>
+                <span>Instant WhatsApp Onboarding</span>
+              </div>
+              <div class="guarantee-item">
+                <i class="fa-solid fa-shield-halved text-gold"></i>
+                <span>100% Privacy Protected</span>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- RIGHT COLUMN: Client Details & Payment Form (Demo Mode) -->
+        <div class="checkout-form-column">
+          
+          <div class="payment-form-card">
+            
+            <div class="form-header">
+              <h2 class="form-title">Enter Details & Complete Payment</h2>
+              <p class="form-subtitle">Fill in your information to activate your coaching program.</p>
+            </div>
+
+            <form id="planEnrollForm" onsubmit="handlePlanPayment(event)">
+              
+              <!-- Section 1: Contact Details -->
+              <div class="form-section">
+                <h3 class="form-section-title"><span class="step-num">1</span> Your Contact Information</h3>
+                
+                <div class="form-group">
+                  <label for="clientName">Full Name <span class="required">*</span></label>
+                  <div class="input-wrap">
+                    <i class="fa-solid fa-user input-icon"></i>
+                    <input type="text" id="clientName" class="form-input" placeholder="e.g. Priya Sharma" required>
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="clientPhone">WhatsApp Phone Number <span class="required">*</span></label>
+                    <div class="input-wrap">
+                      <i class="fa-brands fa-whatsapp input-icon"></i>
+                      <input type="tel" id="clientPhone" class="form-input" placeholder="+91 98765 43210" required>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="clientEmail">Email Address <span class="required">*</span></label>
+                    <div class="input-wrap">
+                      <i class="fa-solid fa-envelope input-icon"></i>
+                      <input type="email" id="clientEmail" class="form-input" placeholder="you@gmail.com" required>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="clientGoal">Primary Goal / Health Focus <span class="required">*</span></label>
+                    <div class="input-wrap">
+                      <i class="fa-solid fa-bullseye input-icon"></i>
+                      <select id="clientGoal" class="form-input" required>
+                        <option value="" disabled selected>Select health focus</option>
+                        <option value="postpartum">Postpartum Fat Loss & Core</option>
+                        <option value="menopause">Menopause & Metabolism Reset</option>
+                        <option value="pcos">PCOS / PCOD Hormonal Balance</option>
+                        <option value="thyroid">Thyroid & Stubborn Fat</option>
+                        <option value="general">General Hormonal Health</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="clientWorkoutPlace">Workout Location Preference <span class="required">*</span></label>
+                    <div class="input-wrap">
+                      <i class="fa-solid fa-dumbbell input-icon"></i>
+                      <select id="clientWorkoutPlace" class="form-input" required>
+                        <option value="home" selected>Home Workouts (No Equipment)</option>
+                        <option value="gym">Gym Workouts (With Equipment)</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- Section 2: Payment Method (Mock / Demo UI) -->
+              <div class="form-section">
+                <div class="section-title-with-badge">
+                  <h3 class="form-section-title"><span class="step-num">2</span> Payment Method</h3>
+                  <span class="demo-badge">Demo Mode Active</span>
+                </div>
+
+                <div class="payment-methods-grid">
+                  
+                  <label class="payment-method-option active" onclick="selectPlanPaymentMethod(this, 'upi')">
+                    <input type="radio" name="plan_pay_method" value="upi" checked>
+                    <div class="method-info">
+                      <div class="method-icon-row">
+                        <i class="fa-solid fa-mobile-screen-button"></i>
+                        <span class="method-name">Instant UPI (GPay, PhonePe, Paytm)</span>
+                      </div>
+                      <span class="method-tag">Recommended • Instant</span>
+                    </div>
+                  </label>
+
+                  <label class="payment-method-option" onclick="selectPlanPaymentMethod(this, 'card')">
+                    <input type="radio" name="plan_pay_method" value="card">
+                    <div class="method-info">
+                      <div class="method-icon-row">
+                        <i class="fa-solid fa-credit-card"></i>
+                        <span class="method-name">Credit / Debit Card</span>
+                      </div>
+                      <span class="method-tag">Visa, Mastercard, RuPay</span>
+                    </div>
+                  </label>
+
+                  <label class="payment-method-option" onclick="selectPlanPaymentMethod(this, 'netbanking')">
+                    <input type="radio" name="plan_pay_method" value="netbanking">
+                    <div class="method-info">
+                      <div class="method-icon-row">
+                        <i class="fa-solid fa-building-columns"></i>
+                        <span class="method-name">Net Banking</span>
+                      </div>
+                      <span class="method-tag">All Major Indian Banks</span>
+                    </div>
+                  </label>
+
+                </div>
+              </div>
+
+              <!-- Submit Button -->
+              <button type="submit" id="planSubmitBtn" class="btn btn-pay-now">
+                <i class="fa-solid fa-lock"></i>
+                <span id="btnPayText">Pay ₹5,997 & Start My 4-Month Plan</span>
+                <i class="fa-solid fa-arrow-right"></i>
+              </button>
+
+              <p class="payment-security-note">
+                <i class="fa-solid fa-shield-halved text-gold"></i>
+                100% Secure Checkout. You will receive immediate WhatsApp onboarding instructions from Razeeka upon payment confirmation.
+              </p>
+
+            </form>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- 4. DEMO SUCCESS MODAL -->
+  <div class="modal-overlay" id="planSuccessModal">
+    <div class="modal-card">
+      <div class="modal-success-icon">
+        <i class="fa-solid fa-check"></i>
+      </div>
+      
+      <h2 class="modal-title">Registration Successful!</h2>
+      <p class="modal-subtitle">Congratulations <span id="modalSuccessName" class="text-gold font-bold"></span>! Your enrollment payment has been verified (Demo Mode).</p>
+      
+      <div class="modal-booking-summary">
+        <div class="modal-summary-row">
+          <span>Enrolled Program:</span>
+          <strong id="modalSuccessPlan"></strong>
+        </div>
+        <div class="modal-summary-row">
+          <span>Coaching Duration:</span>
+          <strong id="modalSuccessDuration" class="text-gold"></strong>
+        </div>
+        <div class="modal-summary-row">
+          <span>WhatsApp Number:</span>
+          <strong id="modalSuccessPhone"></strong>
+        </div>
+        <div class="modal-summary-row">
+          <span>Amount Paid:</span>
+          <strong class="text-gold" id="modalSuccessAmount"></strong>
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <a id="modalPlanWhatsAppBtn" href="https://wa.me/" target="_blank" rel="noopener noreferrer" class="btn btn-gold modal-btn">
+          <i class="fa-brands fa-whatsapp"></i>
+          <span>Send Details to Razeeka on WhatsApp</span>
+        </a>
+        <button type="button" class="btn btn-outline-navy modal-btn" onclick="closePlanSuccessModal()">
+          <span>Back to Home</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. SITE FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom-bar" style="border: 0; padding-top: 0;">
+        <p class="footer-copyright">
+          © 2026 <strong>HER PRIME HEALTH CENTRE</strong>. All Rights Reserved.
+        </p>
+        <p class="footer-credits">
+          Guided with Body, Mind & Soul by <strong>Razeeka</strong>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    // State
+    const urlParams = new URLSearchParams(window.location.search);
+    let currentPlan = urlParams.get('plan') === 'workout' ? 'workout' : 'complete';
+    let paidMonths = 3; // Default 3 months (triggers 1 month free offer)
+
+    const planData = {
+      workout: {
+        badge: 'Movement Only Plan',
+        title: 'Hormone-Aligned Workout Plan',
+        pricePerMonth: 999,
+        features: [
+          'Hormone-Friendly Workouts (Low-Cortisol fat burn)',
+          'Home or Gym Flexible Setups',
+          'Video Form Guidance for Every Movement',
+          'Monthly Workout Progression & Plateau Breaker'
+        ]
+      },
+      complete: {
+        badge: 'Signature 3-Pillar Transformation',
+        title: 'Diet + Workout + Meditation Plan',
+        pricePerMonth: 1999,
+        features: [
+          '100% Customized Hormonal Nutrition & Meal Plans',
+          'Cycle-Aligned Low-Cortisol Workouts (Home/Gym)',
+          'Stress Management & Guided Breathwork / Meditation',
+          'Weekly 1-on-1 Progress Audits with Razeeka',
+          'Daily WhatsApp Accountability & Real-Time Support'
+        ]
+      }
+    };
+
+    function renderCheckout() {
+      const data = planData[currentPlan];
+      
+      // Update plan details
+      document.getElementById('planBadge').textContent = data.badge;
+      document.getElementById('planTitle').textContent = data.title;
+
+      // Update features
+      const listEl = document.getElementById('planFeaturesList');
+      listEl.innerHTML = data.features.map(f => `<li><i class="fa-solid fa-circle-check check-gold"></i> <strong>${f}</strong></li>`).join('');
+
+      // Calculation of Free Months (1 free for every 3 months)
+      const freeMonths = Math.floor(paidMonths / 3);
+      const totalCoachingMonths = paidMonths + freeMonths;
+      const basePayable = paidMonths * data.pricePerMonth;
+      const totalValue = totalCoachingMonths * data.pricePerMonth;
+      const discount = freeMonths * data.pricePerMonth;
+
+      // Free Month Tag and Offer Alert
+      if (freeMonths > 0) {
+        document.getElementById('freeMonthTag').style.display = 'inline-flex';
+        document.getElementById('freeMonthTag').innerHTML = `<i class="fa-solid fa-gift"></i> +${freeMonths} Month${freeMonths > 1 ? 's' : ''} FREE Applied!`;
+        
+        // Alert box
+        document.getElementById('offerStatusAlert').className = 'offer-status-alert alert-success';
+        document.getElementById('offerStatusText').innerHTML = `<i class="fa-solid fa-circle-check text-green"></i> <strong>Special Offer Applied!</strong> You pay for ${paidMonths} Months & receive <strong>${totalCoachingMonths} Full Months of Coaching</strong> (Saved ₹${discount.toLocaleString()}!).`;
+      } else {
+        document.getElementById('freeMonthTag').style.display = 'none';
+
+        const needed = 3 - paidMonths;
+        document.getElementById('offerStatusAlert').className = 'offer-status-alert alert-info';
+        document.getElementById('offerStatusText').innerHTML = `<i class="fa-solid fa-circle-info text-gold"></i> <strong>Tip:</strong> Select <strong>3 Months</strong> to unlock <strong>1 Month 100% FREE!</strong>`;
+      }
+
+      // Update Pills active state
+      [1, 2, 3, 6].forEach(p => {
+        const pillEl = document.getElementById(`pill${p}`);
+        if (pillEl) {
+          if (paidMonths === p) {
+            pillEl.classList.add('active');
+          } else {
+            pillEl.classList.remove('active');
+          }
+        }
+      });
+
+      // Update Price Breakdown
+      if (freeMonths > 0) {
+        document.getElementById('rowOriginalPrice').style.display = 'flex';
+        document.getElementById('rowDiscount').style.display = 'flex';
+        document.getElementById('labelOriginalPrice').textContent = `Total Package Value (${totalCoachingMonths} Months)`;
+        document.getElementById('valOriginalPrice').textContent = `₹${totalValue.toLocaleString()}`;
+        document.getElementById('labelDiscount').textContent = `${freeMonths} Month Free Subsidy Discount`;
+        document.getElementById('valDiscount').textContent = `- ₹${discount.toLocaleString()}`;
+      } else {
+        document.getElementById('rowOriginalPrice').style.display = 'none';
+        document.getElementById('rowDiscount').style.display = 'none';
+      }
+
+      document.getElementById('valTotalPayable').textContent = `₹${basePayable.toLocaleString()}`;
+      
+      // Update Button Text
+      if (freeMonths > 0) {
+        document.getElementById('btnPayText').textContent = `Pay ₹${basePayable.toLocaleString()} & Get ${totalCoachingMonths} Months Coaching`;
+      } else {
+        document.getElementById('btnPayText').textContent = `Pay ₹${basePayable.toLocaleString()} & Start ${paidMonths}-Month Plan`;
+      }
+    }
+
+    function setExactMonths(num) {
+      paidMonths = num;
+      renderCheckout();
+    }
+
+    function claimOfferFromTop() {
+      paidMonths = 3;
+      renderCheckout();
+      // Smooth scroll down to duration selection card
+      const el = document.querySelector('.duration-selection-card');
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    function selectPlanPaymentMethod(element, method) {
+      document.querySelectorAll('.payment-method-option').forEach(opt => {
+        opt.classList.remove('active');
+      });
+      element.classList.add('active');
+    }
+
+    function handlePlanPayment(e) {
+      e.preventDefault();
+      
+      const name = encodeURIComponent(document.getElementById('clientName').value.trim());
+      const phone = encodeURIComponent(document.getElementById('clientPhone').value.trim());
+      const goalSelect = document.getElementById('clientGoal');
+      const goalText = encodeURIComponent(goalSelect.options[goalSelect.selectedIndex].text);
+      const data = planData[currentPlan];
+      const freeMonths = Math.floor(paidMonths / 3);
+      const totalCoachingMonths = paidMonths + freeMonths;
+      const amount = paidMonths * data.pricePerMonth;
+      const originalValue = totalCoachingMonths * data.pricePerMonth;
+      const durationText = encodeURIComponent(freeMonths > 0 ? `${paidMonths} Months (+ ${freeMonths} Month FREE = ${totalCoachingMonths} Months Total)` : `${paidMonths} Month(s)`);
+      const planTitle = encodeURIComponent(data.title);
+
+      const submitBtn = document.getElementById('planSubmitBtn');
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> <span>Generating Machine Receipt...</span>';
+
+      setTimeout(() => {
+        window.location.href = `receipt.html?type=plan&plan=${planTitle}&duration=${durationText}&name=${name}&phone=${phone}&goal=${goalText}&amount=${amount}&orig=${originalValue}`;
+      }, 850);
+    }
+
+    // Initialize on load
+    renderCheckout();
+
+    // Live Ticking Countdown Timer
+    (function initUrgencyCountdown() {
+      let endTime = localStorage.getItem('herprime_offer_end');
+      if (!endTime || new Date().getTime() > parseInt(endTime, 10)) {
+        endTime = new Date().getTime() + (4 * 3600 + 32 * 60 + 15) * 1000;
+        localStorage.setItem('herprime_offer_end', endTime);
+      }
+
+      function updateClock() {
+        const now = new Date().getTime();
+        let distance = parseInt(endTime, 10) - now;
+
+        if (distance <= 0) {
+          endTime = new Date().getTime() + (4 * 3600 + 30 * 60) * 1000;
+          localStorage.setItem('herprime_offer_end', endTime);
+          distance = parseInt(endTime, 10) - now;
+        }
+
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        const hEl = document.getElementById('timerHours');
+        const mEl = document.getElementById('timerMins');
+        const sEl = document.getElementById('timerSecs');
+
+        if (hEl && mEl && sEl) {
+          hEl.textContent = String(hours).padStart(2, '0');
+          mEl.textContent = String(minutes).padStart(2, '0');
+          sEl.textContent = String(seconds).padStart(2, '0');
+        }
+      }
+
+      updateClock();
+      setInterval(updateClock, 1000);
+    })();
+  </script>
+
+</body>
+</html>

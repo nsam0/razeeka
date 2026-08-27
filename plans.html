@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coaching Plans & Pricing | HER PRIME HEALTH CENTRE</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="logo.png">
+
+  <!-- Google Fonts: Playfair Display (Heading) & Inter (Body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600;1,700&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="plans-page">
+
+  <!-- 1. LIVE URGENCY COUNTDOWN TOP BAR -->
+  <div class="urgency-top-bar">
+    <div class="container urgency-container">
+      <div class="urgency-text">
+        <i class="fa-solid fa-fire text-gold"></i>
+        <span><strong>HURRY UP! LIMITED TIME OFFER:</strong> On 3-Month Registration, <strong>Get 1 Month 100% FREE!</strong></span>
+      </div>
+      <div class="countdown-clock" id="countdownClock">
+        <span class="timer-label">Ends In:</span>
+        <span class="time-block" id="timerHours">04</span><span class="colon">:</span>
+        <span class="time-block" id="timerMins">45</span><span class="colon">:</span>
+        <span class="time-block" id="timerSecs">28</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. NAVIGATION BAR -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="brand">
+        <img src="logo.png" alt="HER PRIME HEALTH CENTRE" class="brand-wordmark-logo">
+      </a>
+
+      <nav class="nav-links">
+        <a href="index.html" class="nav-item">Home</a>
+        <a href="index.html#about" class="nav-item">About Us</a>
+        <a href="programs.html" class="nav-item">Programs</a>
+        <a href="plans.html" class="nav-item active">Plans & Pricing</a>
+        <a href="booking.html" class="btn btn-navy">Book a 1-on-1 Call</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- 3. PRICING CARDS SECTION -->
+  <section class="plans-pricing-section">
+    <div class="container">
+      
+      <!-- Clean Minimal Header -->
+      <div class="pricing-page-header text-center">
+        <span class="section-badge">Hormonal Coaching Investment</span>
+        <h1 class="pricing-page-title">
+          Choose Your <span class="text-gold">Transformation Plan</span>
+        </h1>
+        <p class="pricing-page-sub">
+          Sustainable, root-cause hormonal coaching designed around your lifestyle.
+        </p>
+      </div>
+
+      <div class="pricing-grid">
+        
+        <!-- PLAN 1: WORKOUT ONLY -->
+        <div class="pricing-card">
+          <div class="pricing-card-header">
+            <span class="plan-type-tag">Movement Only</span>
+            <h2 class="plan-name">Workout Plan</h2>
+            
+            <div class="plan-price-wrap">
+              <span class="currency">₹</span>
+              <span class="price-amount">999</span>
+              <span class="price-period">/ month</span>
+            </div>
+
+            <div class="plan-bundle-note">
+              <i class="fa-solid fa-gift text-gold"></i>
+              <span>3-Month Offer: <strong>Pay ₹2,997</strong> for <strong>4 Months</strong> (1 Mo. Free)</span>
+            </div>
+          </div>
+
+          <div class="pricing-card-body">
+            <ul class="plan-features-list">
+              <li><i class="fa-solid fa-circle-check check-gold"></i> <span><strong>Hormone-Friendly Workouts:</strong> Low-cortisol strength routines.</span></li>
+              <li><i class="fa-solid fa-circle-check check-gold"></i> <span><strong>Home or Gym:</strong> Fully flexible tailored setups.</span></li>
+              <li><i class="fa-solid fa-circle-check check-gold"></i> <span><strong>Form Video Guides:</strong> Step-by-step video tutorials.</span></li>
+              <li><i class="fa-solid fa-circle-check check-gold"></i> <span><strong>Monthly Progressions:</strong> Prevent workout plateaus.</span></li>
+            </ul>
+          </div>
+
+          <div class="pricing-card-footer">
+            <a href="plan-checkout.html?plan=workout" class="btn btn-gold btn-plan-select">
+              <span>Enroll in Workout Plan</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- PLAN 2: COMPLETE TRANSFORMATION (POPULAR & RECOMMENDED) -->
+        <div class="pricing-card pricing-card-featured">
+          <div class="featured-badge">MOST POPULAR • 100% ROOT CAUSE</div>
+          
+          <div class="pricing-card-header">
+            <span class="plan-type-tag tag-featured">Complete Holistic Program</span>
+            <h2 class="plan-name">Diet + Workout + Meditation</h2>
+            
+            <div class="plan-price-wrap">
+              <span class="currency">₹</span>
+              <span class="price-amount">1,999</span>
+              <span class="price-period">/ month</span>
+            </div>
+
+            <div class="plan-bundle-note note-featured">
+              <i class="fa-solid fa-gift text-gold"></i>
+              <span>3-Month Bundle: <strong>Pay ₹5,997</strong> for <strong>4 Months</strong> (1 Mo. Free)</span>
+            </div>
+          </div>
+
+          <div class="pricing-card-body">
+            <ul class="plan-features-list">
+              <li><i class="fa-solid fa-circle-check check-gold"></i> <span><strong>Tailored Hormonal Diet:</strong> Anti-inflammatory meal plans.</span></li>
+              <li><i class="fa-solid fa-circle-check check-gold"></i> <span><strong>Cycle Workouts:</strong> Low-cortisol home & gym training.</span></li>
+              <li><i class="fa-solid fa-circle-check check-gold"></i> <span><strong>Stress & Meditation:</strong> Adrenal & cortisol calming sessions.</span></li>
+              <li><i class="fa-solid fa-circle-check check-gold"></i> <span><strong>Direct 1-on-1 Audits & Daily WhatsApp:</strong> Mentored directly by Razeeka.</span></li>
+            </ul>
+          </div>
+
+          <div class="pricing-card-footer">
+            <a href="plan-checkout.html?plan=complete" class="btn btn-gold btn-plan-select">
+              <span>Enroll in Complete Transformation</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Quick Comparison Box -->
+      <div class="plans-guarantee-strip">
+        <div class="guarantee-box">
+          <i class="fa-solid fa-heart-pulse guarantee-icon"></i>
+          <div>
+            <h3 class="guarantee-title">Holistic Root-Cause Method</h3>
+            <p>We fix hormonal imbalances instead of pushing temporary, unsustainable calorie cutting.</p>
+          </div>
+        </div>
+        <div class="guarantee-box">
+          <i class="fa-solid fa-comments guarantee-icon"></i>
+          <div>
+            <h3 class="guarantee-title">Direct Expert Guidance</h3>
+            <p>1-on-1 personal mentorship directly with coach Razeeka throughout your journey.</p>
+          </div>
+        </div>
+        <div class="guarantee-box">
+          <i class="fa-solid fa-clock-rotate-left guarantee-icon"></i>
+          <div>
+            <h3 class="guarantee-title">Flexible & Sustainable</h3>
+            <p>Designed around busy moms, working professionals, and real everyday Indian kitchens.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 5. SITE FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      
+      <div class="footer-top-grid">
+        
+        <!-- Col 1: Brand & Philosophy -->
+        <div class="footer-col footer-col-brand">
+          <a href="index.html" class="footer-brand-link">
+            <img src="logo.png" alt="HER PRIME HEALTH CENTRE" class="footer-logo">
+          </a>
+          <p class="footer-brand-desc">
+            Empowering women through root-cause hormonal health, targeted nutrition, and restorative fitness for sustainable weight loss across every life stage.
+          </p>
+          <div class="footer-social-links">
+            <a href="https://instagram.com/fitrazeeka" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Follow on Instagram" aria-label="Instagram">
+              <i class="fa-brands fa-instagram"></i>
+            </a>
+            <a href="https://www.youtube.com/@fitrazeeka4930" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Subscribe on YouTube" aria-label="YouTube">
+              <i class="fa-brands fa-youtube"></i>
+            </a>
+            <a href="https://wa.me/" target="_blank" rel="noopener noreferrer" class="footer-social-btn" title="Chat on WhatsApp" aria-label="WhatsApp">
+              <i class="fa-brands fa-whatsapp"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Col 2: Quick Links -->
+        <div class="footer-col">
+          <h3 class="footer-col-title">Quick Links</h3>
+          <ul class="footer-links-list">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="index.html#about">About Razeeka</a></li>
+            <li><a href="programs.html">Our Programs</a></li>
+            <li><a href="plans.html">Plans & Pricing</a></li>
+            <li><a href="booking.html">Book a 1-on-1 Call</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Programs & Specializations -->
+        <div class="footer-col">
+          <h3 class="footer-col-title">Our Programs</h3>
+          <ul class="footer-links-list">
+            <li><a href="programs.html#postpartum">Postpartum Weight Loss</a></li>
+            <li><a href="programs.html#menopause">Menopause & Perimenopause</a></li>
+            <li><a href="programs.html#pcod-pcos">PCOS / PCOD Reversal</a></li>
+            <li><a href="booking.html">₹99 Consultation Call</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 4: Contact & Inquiries -->
+        <div class="footer-col">
+          <h3 class="footer-col-title">Get In Touch</h3>
+          <div class="footer-contact-info">
+            <div class="contact-item">
+              <i class="fa-brands fa-whatsapp contact-icon"></i>
+              <div>
+                <span class="contact-label">Direct WhatsApp:</span>
+                <a href="https://wa.me/" target="_blank" rel="noopener noreferrer" class="contact-value">Chat with Razeeka</a>
+              </div>
+            </div>
+            <div class="contact-item">
+              <i class="fa-solid fa-globe contact-icon"></i>
+              <div>
+                <span class="contact-label">Consultation Mode:</span>
+                <span class="contact-value">Online Worldwide (1-on-1)</span>
+              </div>
+            </div>
+            <div class="contact-item">
+              <i class="fa-solid fa-clock contact-icon"></i>
+              <div>
+                <span class="contact-label">Hours:</span>
+                <span class="contact-value">Mon – Sat (By Appointment)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Medical Disclaimer -->
+      <div class="footer-disclaimer">
+        <p>
+          <strong>Medical Disclaimer:</strong> The coaching, nutritional frameworks, and educational guidance provided by HER PRIME HEALTH CENTRE and Razeeka are intended for lifestyle and general health improvement purposes. They do not constitute formal medical diagnosis, treatment, or personalized medical advice. Always consult your qualified healthcare practitioner regarding specific medical conditions.
+        </p>
+      </div>
+
+      <!-- Bottom Bar -->
+      <div class="footer-bottom-bar">
+        <p class="footer-copyright">
+          © 2026 <strong>HER PRIME HEALTH CENTRE</strong>. All Rights Reserved.
+        </p>
+        <p class="footer-credits">
+          Guided with Body, Mind & Soul by <strong>Razeeka</strong>
+        </p>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- 6. LIVE HURRY UP COUNTDOWN SCRIPT -->
+  <script>
+    (function initUrgencyCountdown() {
+      // Set end time 5 hours from first visit or keep ticking loop
+      let endTime = localStorage.getItem('herprime_offer_end');
+      if (!endTime || new Date().getTime() > parseInt(endTime, 10)) {
+        endTime = new Date().getTime() + (4 * 3600 + 45 * 60 + 30) * 1000;
+        localStorage.setItem('herprime_offer_end', endTime);
+      }
+
+      function updateClock() {
+        const now = new Date().getTime();
+        let distance = parseInt(endTime, 10) - now;
+
+        if (distance <= 0) {
+          // Reset loop
+          endTime = new Date().getTime() + (4 * 3600 + 30 * 60) * 1000;
+          localStorage.setItem('herprime_offer_end', endTime);
+          distance = parseInt(endTime, 10) - now;
+        }
+
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        const hEl = document.getElementById('timerHours');
+        const mEl = document.getElementById('timerMins');
+        const sEl = document.getElementById('timerSecs');
+
+        if (hEl && mEl && sEl) {
+          hEl.textContent = String(hours).padStart(2, '0');
+          mEl.textContent = String(minutes).padStart(2, '0');
+          sEl.textContent = String(seconds).padStart(2, '0');
+        }
+      }
+
+      updateClock();
+      setInterval(updateClock, 1000);
+    })();
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book 1-on-1 Consultation (₹99) | HER PRIME HEALTH CENTRE</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="logo.png">
+
+  <!-- Google Fonts: Playfair Display (Heading) & Inter (Body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600;1,700&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="booking-page-body">
+
+  <!-- 1. CHECKOUT HEADER -->
+  <header class="checkout-navbar">
+    <div class="container checkout-nav-container">
+      <a href="index.html" class="checkout-brand">
+        <img src="logo.png" alt="HER PRIME HEALTH CENTRE" class="checkout-logo">
+      </a>
+      
+      <div class="checkout-trust-badge">
+        <i class="fa-solid fa-shield-halved text-gold"></i>
+        <span>256-Bit SSL Encrypted Checkout</span>
+      </div>
+
+      <a href="index.html" class="checkout-back-link">
+        <i class="fa-solid fa-arrow-left"></i>
+        <span>Back to Home</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- 2. MAIN CHECKOUT SECTION -->
+  <main class="checkout-main-section">
+    <div class="container">
+      
+      <!-- Top Alert / Offer Bar -->
+      <div class="checkout-top-banner">
+        <i class="fa-solid fa-bolt text-gold"></i>
+        <span><strong>Special Limited-Time Discovery Offer:</strong> 1-on-1 Root-Cause Consultation with Razeeka for just <strong>₹99</strong> (Regularly ₹1,999)</span>
+      </div>
+
+      <div class="checkout-grid">
+        
+        <!-- LEFT COLUMN: Consultation Summary & Value -->
+        <div class="checkout-summary-column">
+          
+          <div class="summary-card">
+            <span class="summary-badge">Direct Expert Consultation</span>
+            
+            <h1 class="summary-title">1-on-1 Hormonal Health & Weight Loss Strategy Call</h1>
+            
+            <div class="coach-meta-card">
+              <img src="raseeka.jpg" alt="Razeeka" class="coach-avatar">
+              <div class="coach-details">
+                <h3 class="coach-name">Razeeka</h3>
+                <span class="coach-designation">Founder & Women's Hormonal Weight Loss Specialist</span>
+                <span class="coach-exp"><i class="fa-solid fa-award text-gold"></i> 7+ Years Experience • 1000+ Women Guided</span>
+              </div>
+            </div>
+
+            <div class="call-specs">
+              <div class="spec-item">
+                <i class="fa-solid fa-clock spec-icon"></i>
+                <div>
+                  <strong>Duration</strong>
+                  <span>30–40 Mins (Live 1-on-1)</span>
+                </div>
+              </div>
+              <div class="spec-item">
+                <i class="fa-solid fa-video spec-icon"></i>
+                <div>
+                  <strong>Platform</strong>
+                  <span>Private Video / Audio Call</span>
+                </div>
+              </div>
+              <div class="spec-item">
+                <i class="fa-brands fa-whatsapp spec-icon"></i>
+                <div>
+                  <strong>Confirmation</strong>
+                  <span>Instant via WhatsApp</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="whats-included">
+              <h4 class="included-title">What Will Happen In Your 1-on-1 Call:</h4>
+              <ul class="included-list">
+                <li><i class="fa-solid fa-circle-check check-gold"></i> <strong>Root-Cause Audit:</strong> Detailed assessment of your PCOS, Postpartum, Menopause, or Thyroid symptoms.</li>
+                <li><i class="fa-solid fa-circle-check check-gold"></i> <strong>Metabolic Roadblock Breakdown:</strong> Discover why regular diets and cardio aren't working for your hormones.</li>
+                <li><i class="fa-solid fa-circle-check check-gold"></i> <strong>Personalized Roadmap:</strong> Actionable steps for hormone-friendly nutrition and low-cortisol workouts.</li>
+                <li><i class="fa-solid fa-circle-check check-gold"></i> <strong>Direct Q&A:</strong> Ask all your personal questions directly to Razeeka.</li>
+              </ul>
+            </div>
+
+            <!-- Price Summary Box -->
+            <div class="price-breakdown-box">
+              <div class="price-row">
+                <span>Standard Consultation Fee</span>
+                <span class="strike-price">₹1,999</span>
+              </div>
+              <div class="price-row">
+                <span>Discovery Subsidy Discount</span>
+                <span class="text-green">- ₹1,900</span>
+              </div>
+              <div class="price-row total-row">
+                <span>Total Amount Payable</span>
+                <span class="final-price">₹99</span>
+              </div>
+            </div>
+
+            <div class="trust-guarantees">
+              <div class="guarantee-item">
+                <i class="fa-solid fa-circle-check text-gold"></i>
+                <span>100% Confidential & Private</span>
+              </div>
+              <div class="guarantee-item">
+                <i class="fa-solid fa-calendar-check text-gold"></i>
+                <span>Flexible Slot Rescheduling</span>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- RIGHT COLUMN: Client Booking & Payment Form (Demo Mode) -->
+        <div class="checkout-form-column">
+          
+          <div class="payment-form-card">
+            
+            <div class="form-header">
+              <h2 class="form-title">Enter Details & Pay ₹99</h2>
+              <p class="form-subtitle">Fill in your information to schedule your 1-on-1 private slot.</p>
+            </div>
+
+            <form id="bookingForm" onsubmit="handleDemoPayment(event)">
+              
+              <!-- Section 1: Contact Details -->
+              <div class="form-section">
+                <h4 class="form-section-title"><span class="step-num">1</span> Your Contact Information</h4>
+                
+                <div class="form-group">
+                  <label for="fullName">Full Name <span class="required">*</span></label>
+                  <div class="input-wrap">
+                    <i class="fa-solid fa-user input-icon"></i>
+                    <input type="text" id="fullName" class="form-input" placeholder="e.g. Ayesha Sharma" required>
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="whatsappNumber">WhatsApp Phone Number <span class="required">*</span></label>
+                    <div class="input-wrap">
+                      <i class="fa-brands fa-whatsapp input-icon"></i>
+                      <input type="tel" id="whatsappNumber" class="form-input" placeholder="+91 98765 43210" required>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="emailAddress">Email Address <span class="required">*</span></label>
+                    <div class="input-wrap">
+                      <i class="fa-solid fa-envelope input-icon"></i>
+                      <input type="email" id="emailAddress" class="form-input" placeholder="you@gmail.com" required>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="primaryGoal">Primary Goal / Concern <span class="required">*</span></label>
+                    <div class="input-wrap">
+                      <i class="fa-solid fa-bullseye input-icon"></i>
+                      <select id="primaryGoal" class="form-input" required>
+                        <option value="" disabled selected>Select your concern</option>
+                        <option value="postpartum">Postpartum Weight Loss</option>
+                        <option value="menopause">Menopause / Perimenopause</option>
+                        <option value="pcos">PCOS / PCOD Hormonal Balance</option>
+                        <option value="thyroid">Thyroid & Stubborn Fat</option>
+                        <option value="general">General Hormonal Health</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="preferredTime">Preferred Call Time <span class="required">*</span></label>
+                    <div class="input-wrap">
+                      <i class="fa-solid fa-clock input-icon"></i>
+                      <select id="preferredTime" class="form-input" required>
+                        <option value="" disabled selected>Select preferred slot</option>
+                        <option value="morning">Morning (10:00 AM – 1:00 PM)</option>
+                        <option value="afternoon">Afternoon (2:00 PM – 5:00 PM)</option>
+                        <option value="evening">Evening (6:00 PM – 9:00 PM)</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- Section 2: Payment Method (Mock / Demo UI) -->
+              <div class="form-section">
+                <div class="section-title-with-badge">
+                  <h4 class="form-section-title"><span class="step-num">2</span> Select Payment Mode</h4>
+                  <span class="demo-badge">Demo Mode Active</span>
+                </div>
+
+                <div class="payment-methods-grid">
+                  
+                  <label class="payment-method-option active" onclick="selectPaymentMethod(this, 'upi')">
+                    <input type="radio" name="payment_method" value="upi" checked>
+                    <div class="method-info">
+                      <div class="method-icon-row">
+                        <i class="fa-solid fa-mobile-screen-button"></i>
+                        <span class="method-name">Instant UPI (GPay, PhonePe, Paytm)</span>
+                      </div>
+                      <span class="method-tag">Recommended • Instant</span>
+                    </div>
+                  </label>
+
+                  <label class="payment-method-option" onclick="selectPaymentMethod(this, 'card')">
+                    <input type="radio" name="payment_method" value="card">
+                    <div class="method-info">
+                      <div class="method-icon-row">
+                        <i class="fa-solid fa-credit-card"></i>
+                        <span class="method-name">Credit / Debit Card</span>
+                      </div>
+                      <span class="method-tag">Visa, Mastercard, RuPay</span>
+                    </div>
+                  </label>
+
+                  <label class="payment-method-option" onclick="selectPaymentMethod(this, 'netbanking')">
+                    <input type="radio" name="payment_method" value="netbanking">
+                    <div class="method-info">
+                      <div class="method-icon-row">
+                        <i class="fa-solid fa-building-columns"></i>
+                        <span class="method-name">Net Banking</span>
+                      </div>
+                      <span class="method-tag">All Major Indian Banks</span>
+                    </div>
+                  </label>
+
+                </div>
+              </div>
+
+              <!-- Submit Button -->
+              <button type="submit" id="paySubmitBtn" class="btn btn-pay-now">
+                <i class="fa-solid fa-lock"></i>
+                <span>Pay ₹99 & Confirm 1-on-1 Call</span>
+                <i class="fa-solid fa-arrow-right"></i>
+              </button>
+
+              <p class="payment-security-note">
+                <i class="fa-solid fa-shield-halved text-gold"></i>
+                By completing payment, your slot with Razeeka will be booked instantly and confirmation details sent to your WhatsApp.
+              </p>
+
+            </form>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- 3. DEMO SUCCESS MODAL -->
+  <div class="modal-overlay" id="successModal">
+    <div class="modal-card">
+      <div class="modal-success-icon">
+        <i class="fa-solid fa-check"></i>
+      </div>
+      
+      <h2 class="modal-title">1-on-1 Slot Booked Successfully!</h2>
+      <p class="modal-subtitle">Thank you <span id="modalClientName" class="text-gold font-bold"></span>! Your ₹99 payment has been verified (Demo Mode).</p>
+      
+      <div class="modal-booking-summary">
+        <div class="modal-summary-row">
+          <span>Consultant:</span>
+          <strong>Razeeka</strong>
+        </div>
+        <div class="modal-summary-row">
+          <span>WhatsApp Number:</span>
+          <strong id="modalClientPhone"></strong>
+        </div>
+        <div class="modal-summary-row">
+          <span>Selected Time Slot:</span>
+          <strong id="modalClientSlot"></strong>
+        </div>
+        <div class="modal-summary-row">
+          <span>Amount Paid:</span>
+          <strong class="text-gold">₹99 (Confirmed)</strong>
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <a id="modalWhatsAppBtn" href="https://wa.me/" target="_blank" rel="noopener noreferrer" class="btn btn-gold modal-btn">
+          <i class="fa-brands fa-whatsapp"></i>
+          <span>Send Slot Details on WhatsApp</span>
+        </a>
+        <button type="button" class="btn btn-outline-navy modal-btn" onclick="closeSuccessModal()">
+          <span>Back to Website</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. SITE FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom-bar" style="border: 0; padding-top: 0;">
+        <p class="footer-copyright">
+          © 2026 <strong>HER PRIME HEALTH CENTRE</strong>. All Rights Reserved.
+        </p>
+        <p class="footer-credits">
+          Guided with Body, Mind & Soul by <strong>Razeeka</strong>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    function selectPaymentMethod(element, method) {
+      document.querySelectorAll('.payment-method-option').forEach(opt => {
+        opt.classList.remove('active');
+      });
+      element.classList.add('active');
+    }
+
+    function handleDemoPayment(e) {
+      e.preventDefault();
+      
+      const name = encodeURIComponent(document.getElementById('fullName').value.trim());
+      const phone = encodeURIComponent(document.getElementById('whatsappNumber').value.trim());
+      const goalSelect = document.getElementById('primaryGoal');
+      const goalText = encodeURIComponent(goalSelect.options[goalSelect.selectedIndex].text);
+      const slotSelect = document.getElementById('preferredTime');
+      const slotText = encodeURIComponent(slotSelect.options[slotSelect.selectedIndex].text);
+      
+      const submitBtn = document.getElementById('paySubmitBtn');
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> <span>Generating Machine Receipt...</span>';
+
+      setTimeout(() => {
+        window.location.href = `receipt.html?type=booking&name=${name}&phone=${phone}&goal=${goalText}&slot=${slotText}&amount=99`;
+      }, 850);
+    }
+  </script>
+
+</body>
+</html>
